@@ -3,12 +3,17 @@ import Header from "./Header";
 import { checkValidate } from "../utils/validate";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import {  updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import {BACKGROUND_IMG, USER_AVATAR} from "../utils/constants"
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const dispatch = useDispatch();
 
-  // const name = useRef();
+  const fname = useRef();
   const email = useRef();
   const password = useRef();
 
@@ -38,7 +43,23 @@ const Login = () => {
         )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user)
+          updateProfile(user, {
+            displayName: fname.current.value, 
+            photoURL: USER_AVATAR,
+          }).then(() => {
+            const {uid,email, displayName, photoURL} = auth.currentUser;
+        dispatch(
+          addUser({
+            uid: uid, 
+            email: email, 
+            displayName: displayName, 
+            photoURL: photoURL}));
+            
+          }).catch((error) => {
+            setErrorMessage(error.message);
+          });
+          console.log(user);
+       
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -55,7 +76,7 @@ const Login = () => {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    console.log(user)
+   
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -73,8 +94,8 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/ab4b0b22-2ddf-4d48-ae88-c201ae0267e2/0efe6360-4f6d-4b10-beb6-81e0762cfe81/IN-en-20231030-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-          alt="logo"
+          src={BACKGROUND_IMG}
+          alt="backgroun-img"
         />
       </div>
       <form
@@ -89,7 +110,7 @@ const Login = () => {
 
         {!isSignInForm && (
           <input
-            // ref={name}
+            ref={fname}
             type="text"
             placeholder="Full Name"
             className="p-2 my-4 w-full bg-gray-700 rounded-lg"
