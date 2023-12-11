@@ -38,6 +38,11 @@
 - usePopularMovies Custom Hooks
 - useTopRatedMovies Custom Hooks
 - useUpcomingMovies Custom Hooks
+- GPT Search Feature
+- GPT Search Page
+- GPT Search Bar
+- Multi language feature in gpt search
+- Integrate GPT APIs(get openAI key)
 
 
 
