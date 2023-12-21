@@ -24,12 +24,9 @@ const Login = () => {
     const passwordValue = password.current.value;
     // const nameValue = isSignInForm ? null : name.current.value;
 
-    // console.log(name.current.value);
-    console.log(email.current.value);
-    console.log(password.current.value);
-
+   
+  
     const message = checkValidate(emailValue, passwordValue);
-    console.log(message);
     setErrorMessage(message);
 
     if (message) return;
@@ -58,7 +55,7 @@ const Login = () => {
           }).catch((error) => {
             setErrorMessage(error.message);
           });
-          console.log(user);
+       
        
         })
         .catch((error) => {
