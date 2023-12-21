@@ -43,6 +43,14 @@
 - GPT Search Bar
 - Multi language feature in gpt search
 - Integrate GPT APIs(get openAI key)
+- GPT Search API Call
+- fetched GPT movie suggestions from TMDB
+- gptSlice added data over there 
+- Reused MovieList component to make movie suggestion container
+- Memoization
+- Added .env file 
+- Added .env file to gitignore
+- Made our site responsive 
 
 
 

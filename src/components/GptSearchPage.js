@@ -12,16 +12,16 @@ const GptSearchPage = () => {
     dispatch(resetMovieList())
   }, [dispatch]);
   return (
-    <div>
-      <div className="fixed -z-10">
-        <img
-          src={BACKGROUND_IMG}
-          alt="backgroun-img"
-        />
-      </div>
-      <GptSearchbar/>
-      <GptMovieSuggestions/>
+    <>
+    <div className='fixed -z-10'>
+      <img className="h-screen object-cover w-screen" src={BACKGROUND_IMG} alt="bg-image"/>
     </div>
+    <div className='pt-[30%] md:p-0'>
+    <GptSearchbar />
+    <GptMovieSuggestions />
+    </div>
+    </>
+      
   )
 }
 
