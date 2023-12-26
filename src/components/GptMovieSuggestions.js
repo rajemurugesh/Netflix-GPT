@@ -1,8 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MovieList from "./MovieList";
+import { selectedMovie } from "../utils/gptSlice";
 
 const GptMovieSuggestions = () => {
+  const dispatch = useDispatch();
+
+  const handleMovieClick = (movie) => {
+    dispatch(selectedMovie(movie));
+  }
+
   const { movieResult, movieNames } = useSelector((store) => store.gpt);
   console.log(movieResult, movieNames);
   if (!movieNames) return null;
